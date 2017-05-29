@@ -25,14 +25,30 @@ public class Task extends RealmObject {
 
     @Required
     private String mName;
-    private TrackingCriteria mTrackingCriteria;
+    private String mTrackingCriteria;
     // if mTrackingCriteria is percentage, mProgress is an integer 0:100
     // if is time, mProgress is integer timeUnits
     private int mProgressPercentage;
     private int mProgressTime;
-    private TrackingCriteria mProgressTimeUnit;
+    private String mTrackingCriteriaTimeUnit;
     private Date mProjectedStartDate;
     private Date mProjectedEndDate;
+
+    public void saveTrackingCriteria(TrackingCriteria val) {
+        this.mTrackingCriteria = val.name();
+    }
+
+    public TrackingCriteria getTrackingCriteria() {
+        return (mTrackingCriteria != null) ? TrackingCriteria.valueOf(mTrackingCriteria) : null;
+    }
+
+    public void saveTrackingCriteriaTimeUnit(TrackingCriteriaTimeUnit val) {
+        this.mTrackingCriteriaTimeUnit = val.name();
+    }
+
+    public TrackingCriteriaTimeUnit getTrackingCriteriaTimeUnit() {
+        return (mTrackingCriteriaTimeUnit != null) ? TrackingCriteriaTimeUnit.valueOf(mTrackingCriteriaTimeUnit) : null;
+    }
 
 
 }

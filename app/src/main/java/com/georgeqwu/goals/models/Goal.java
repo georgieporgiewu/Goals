@@ -12,10 +12,10 @@ import io.realm.annotations.Required;
 
 public class Goal extends RealmObject {
 
-    public enum Priority {
+    public enum PriorityValue {
         LOW(1), MEDIUM(2), HIGH(3), URGENT(4), NONE(0);
         private final int value;
-        Priority(int value) {
+        PriorityValue(int value) {
             this.value = value;
         }
         public int getValue() {
@@ -25,12 +25,30 @@ public class Goal extends RealmObject {
 
     @Required
     private String mGoalName;
-    @Required
-    private Priority mPriority;
+    private int mPriorityValue;
     @Required
     private Date mStartDate;
     private Date mEndDate;
     private RealmList<Task> mTasks;
+
+    public void savePriorityValue(PriorityValue val) {
+        this.mPriorityValue = val.getValue();
+    }
+
+    public PriorityValue getPriorityValue(int i) {
+        switch (i) {
+            case 1:
+                return PriorityValue.LOW;
+            case 2:
+                return PriorityValue.MEDIUM;
+            case 3:
+                return PriorityValue.HIGH;
+            case 4:
+                return PriorityValue.URGENT;
+            default:
+                return PriorityValue.NONE;
+        }
+    }
 
 
 }
