@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.create_new_goal) {
+        if (id == R.id.nav_create_new_goal) {
             // Handle the camera action
             Intent i = new Intent(this, CreateGoalActivity.class);
             startActivity(i);
@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_about_app) {
+            // TODO create about page, credit DinosoftLabs for icons
 
         } else if (id == R.id.nav_share) {
 
