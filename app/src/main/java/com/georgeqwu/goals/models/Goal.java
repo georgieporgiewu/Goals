@@ -21,6 +21,20 @@ public class Goal extends RealmObject {
         public int getValue() {
             return value;
         }
+        public PriorityValue getPriorityValueForString(String s) {
+            switch (s.toLowerCase()) {
+                case ("low"):
+                    return LOW;
+                case ("medium"):
+                    return MEDIUM;
+                case ("high"):
+                    return HIGH;
+                case ("urgent"):
+                    return URGENT;
+                default:
+                    return NONE;
+            }
+        }
     }
 
     @Required
