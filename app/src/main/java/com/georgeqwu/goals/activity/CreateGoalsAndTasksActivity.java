@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.georgeqwu.goals.R;
 import com.georgeqwu.goals.fragment.CreateGoalFragment;
+import com.georgeqwu.goals.fragment.CreateTaskFragment;
 
 
 /**
@@ -19,7 +20,8 @@ import com.georgeqwu.goals.fragment.CreateGoalFragment;
  */
 
 public class CreateGoalsAndTasksActivity extends AppCompatActivity
-                implements CreateGoalFragment.OnFragmentInteractionListener {
+                implements CreateGoalFragment.ContinueToTasksListener,
+                            CreateTaskFragment.OnFragmentInteractionListener {
 
     //
     // Enum of fragments
@@ -29,6 +31,7 @@ public class CreateGoalsAndTasksActivity extends AppCompatActivity
     }
 
     CreateGoalFragment mCreateGoalFragment;
+    CreateTaskFragment mCreateTaskFragment;
     Tab mCurrentFragment;
 
     @Override
@@ -43,7 +46,7 @@ public class CreateGoalsAndTasksActivity extends AppCompatActivity
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.create_goal);
 
-        goToFragment(Tab.CREATE_GOAL, null);
+        goToFragment(Tab.CREATE_GOAL);
     }
 
     @Override
@@ -62,11 +65,28 @@ public class CreateGoalsAndTasksActivity extends AppCompatActivity
         }
     }
 
-    public void onFragmentInteraction(Uri uri) {
-        // TODO update this with fragment interaction
+    @Override
+    public void onBackPressed() {
+        if (mCurrentFragment == Tab.CREATE_TASK) {
+            goToFragment(Tab.CREATE_GOAL);
+        }
     }
 
-    public void goToFragment(Tab nextFragment, Bundle bundle) {
+    @Override
+    public void continueToTasksFragment() {
+        goToFragment(Tab.CREATE_TASK);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    private void goToFragment(Tab nextFragment) {
+        goToFragment(nextFragment, null);
+    }
+
+    private void goToFragment(Tab nextFragment, Bundle bundle) {
         String existingName;
         String requestedName;
         Fragment requestedFragment;
@@ -77,6 +97,9 @@ public class CreateGoalsAndTasksActivity extends AppCompatActivity
         switch (nextFragment) {
             case CREATE_GOAL:
                 requestedFragment = mCreateGoalFragment;
+                break;
+            case CREATE_TASK:
+                requestedFragment = mCreateTaskFragment;
                 break;
             default:
                 requestedFragment = mCreateGoalFragment;
@@ -135,6 +158,7 @@ public class CreateGoalsAndTasksActivity extends AppCompatActivity
 
     private void instantiateFragments() {
         mCreateGoalFragment = new CreateGoalFragment();
+        mCreateTaskFragment = new CreateTaskFragment();
     }
 
 }

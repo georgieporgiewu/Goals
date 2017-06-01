@@ -2,7 +2,6 @@ package com.georgeqwu.goals.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,7 +25,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CreateGoalFragment.OnFragmentInteractionListener} interface
+ * {@link ContinueToTasksListener} interface
  * to handle interaction events.
  * Use the {@link CreateGoalFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -47,8 +47,9 @@ public class CreateGoalFragment extends Fragment {
     private boolean mPrioritiesSpinnerItemFirstClickedCalled;
     private Spinner mPrioritiesSpinner;
     private String mPrioritySelected;
+    private Button mContinueButton;
 
-    private OnFragmentInteractionListener mListener;
+    private ContinueToTasksListener mListener;
 
     public CreateGoalFragment() {
         // Required empty public constructor
@@ -136,20 +137,22 @@ public class CreateGoalFragment extends Fragment {
 
             }
         });
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        mContinueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.continueToTasksFragment();
+                }
+            }
+        });
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof ContinueToTasksListener) {
+            mListener = (ContinueToTasksListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -172,7 +175,7 @@ public class CreateGoalFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+    public interface ContinueToTasksListener {
+        void continueToTasksFragment();
     }
 }
