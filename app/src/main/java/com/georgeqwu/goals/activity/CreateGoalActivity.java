@@ -7,8 +7,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.georgeqwu.goals.R;
 import com.georgeqwu.goals.utility.DateUtility;
@@ -25,6 +29,11 @@ public class CreateGoalActivity extends AppCompatActivity {
 
     private EditText mEndDateEditText;
     private TextInputLayout mEndDateTextInputLayout;
+    private TextView mPrioritiesTextView;
+
+    private boolean mPrioritiesSpinnerItemFirstClickedCalled;
+    private Spinner mPrioritiesSpinner;
+    private String mPrioritySelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,7 @@ public class CreateGoalActivity extends AppCompatActivity {
     }
 
     private void setUpButtonsAndListeners() {
+        mPrioritiesSpinnerItemFirstClickedCalled = false;
         mEndDateEditText = (EditText) findViewById(R.id.end_date_edit_text);
         mEndDateTextInputLayout = (TextInputLayout) findViewById(R.id.input_layout_end_date);
         mEndDateEditText.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +85,29 @@ public class CreateGoalActivity extends AppCompatActivity {
                 }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.getDatePicker().setMinDate(today.getTime());
                 datePickerDialog.show();
+            }
+        });
+
+        mPrioritiesTextView = (TextView) findViewById(R.id.priorities_text_view);
+
+        mPrioritiesSpinner = (Spinner) findViewById(R.id.priorities_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.priorities_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPrioritiesSpinner.setAdapter(adapter);
+        mPrioritiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (mPrioritiesSpinnerItemFirstClickedCalled) {
+                    mPrioritiesTextView.setTextColor(getResources().getColor(R.color.lightGray));
+                }
+                mPrioritiesSpinnerItemFirstClickedCalled = true;
+                mPrioritySelected = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }

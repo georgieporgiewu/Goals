@@ -7,6 +7,14 @@
     <string name="description">Optional Description</string>
     <string name="end_date_text">Select a date to achieve goal!</string>
     <string name="goal_finish_date">Desired completion date</string>
+    <string name="set_priority">Set Priority</string>
+    <string-array name="priorities_array">
+        <item>None</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Urgent</item>
+    </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
