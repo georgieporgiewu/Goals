@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.CreateGoalActivity"
+            android:name=".activity.CreateGoalsAndTasksActivity"
             android:label="@string/create_goal"
             android:screenOrientation="portrait">
         </activity>

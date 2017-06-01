@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, CreateGoalActivity.class);
+                Intent i = new Intent(MainActivity.this, CreateGoalsAndTasksActivity.class);
                 startActivity(i);
             }
         });
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_create_new_goal) {
             // Handle the camera action
-            Intent i = new Intent(this, CreateGoalActivity.class);
+            Intent i = new Intent(this, CreateGoalsAndTasksActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_gallery) {
 
