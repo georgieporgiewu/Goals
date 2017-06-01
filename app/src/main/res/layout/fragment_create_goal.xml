@@ -103,7 +103,13 @@
             </Spinner>
         </LinearLayout>
 
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="@string/continue_string"
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
     </LinearLayout>
 
